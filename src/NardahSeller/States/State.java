@@ -1,12 +1,15 @@
 package NardahSeller.States;
 
 import NardahSeller.Constants;
+import org.rspeer.runetek.adapter.component.InterfaceComponent;
 import org.rspeer.runetek.adapter.scene.Player;
 import org.rspeer.runetek.api.component.Bank;
+import org.rspeer.runetek.api.component.Interfaces;
 import org.rspeer.runetek.api.component.tab.Inventory;
+import org.rspeer.runetek.api.scene.Npcs;
 import org.rspeer.runetek.api.scene.Players;
 import org.rspeer.runetek.api.scene.SceneObjects;
-
+import org.rspeer.runetek.adapter.scene.Npc;
 
 public class State {
     Player player = Players.getLocal();
@@ -14,6 +17,11 @@ public class State {
 //    public static boolean nearBankArea() {
 //        player.distance()
 //    }
+
+    InterfaceComponent shopInterface = Interfaces.getComponent(Constants.SHOPINTERFACEID, Constants.SHOPCHILDID);
+
+
+    public static String action = "None";
 
     public static boolean isInvEmpty() {
         return Inventory.isEmpty();
@@ -35,5 +43,21 @@ public class State {
         return SceneObjects.getNearest(Constants.SCENENARDAHCART) != null;
     }
 
+    public static boolean isAtShop() {
+        return Constants.NARDAHSHOP.getPosition().distance(Players.getLocal()) < 4;
+    }
+
+    public static boolean seesMerchant() {
+        return Npcs.getNearest(Constants.MERCHANT) != null ;
+    }
+
+//    public static boolean isShopOpen() {
+//        boolean b = shop != null;
+//
+//        if (shopInterface != null) {
+//
+//        }
+//        return ;
+//    }
 
 }

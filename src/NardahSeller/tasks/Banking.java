@@ -3,7 +3,6 @@ package NardahSeller.tasks;
 import NardahSeller.Constants;
 import NardahSeller.States.SecureGenerator;
 import NardahSeller.States.State;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import org.rspeer.runetek.api.commons.Time;
 import org.rspeer.runetek.api.component.Bank;
 import org.rspeer.runetek.api.component.tab.Inventory;
@@ -29,7 +28,6 @@ public class Banking extends Task {
 //          Wanneer niet in bank --> kopen
             if (!State.invContainsTP()) {
                 if (Bank.contains(Constants.NARDAHTPID)) {
-                    Log.info("Nardah tp van de bank halen: ");
                     Bank.withdraw(Constants.NARDAHTPID, 1);
                     Time.sleep(SecureGenerator.randomInt(1328, 2237));
 
