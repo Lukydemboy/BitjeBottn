@@ -13,7 +13,7 @@ public class Banking extends Task {
 
     @Override
     public boolean validate() {
-        return (State.isInvEmpty() || !State.invContainsTP() || !State.invContainsSellItems("Rune"));
+        return (State.isInvEmpty() || !State.invContainsTP() || !State.invContainsSellItems("Rune")) && !State.isInNardah();
     }
 
     @Override
@@ -42,8 +42,12 @@ public class Banking extends Task {
 
 //            Alle items die we moeten sellen van de bank halen
             for (int itemID : Constants.BANKITEMS) {
+                if (!String.valueOf(Bank.getWithdrawMode()).equals("NOTE")) {
+                    Bank.setWithdrawMode(Bank.WithdrawMode.NOTE);
+                    Time.sleep(SecureGenerator.randomInt(1328, 2237));
+                }
 
-                if (Bank.contains(itemID)) {
+                if (Bank.contains(itemID) && String.valueOf(Bank.getWithdrawMode()).equals("NOTE")) {
                     Bank.withdrawAll(itemID);
                     Time.sleep(SecureGenerator.randomInt(1228, 2837));
 

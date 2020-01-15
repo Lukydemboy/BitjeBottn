@@ -51,13 +51,8 @@ public class State {
         return Npcs.getNearest(Constants.MERCHANT) != null ;
     }
 
-//    public static boolean isShopOpen() {
-//        boolean b = shop != null;
-//
-//        if (shopInterface != null) {
-//
-//        }
-//        return ;
-//    }
+    public static boolean isShopOpen() {
+        return Interfaces.getComponent(Constants.SHOPINTERFACEID, Constants.SHOPCHILDID) != null ;
+    }
 
 }

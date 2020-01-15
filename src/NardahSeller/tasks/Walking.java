@@ -13,7 +13,8 @@ import org.rspeer.ui.Log;
 public class Walking extends Task {
     @Override
     public boolean validate() {
-        return (State.invContainsTP() && State.invContainsSellItems("Rune")  && SceneObjects.getNearest(Constants.SCENENARDAHCART) == null);
+        Log.info("Validating Walking...");
+        return (State.invContainsSellItems("Rune")  && SceneObjects.getNearest(Constants.SCENENARDAHCART) != null && !State.isAtShop());
     }
 
 

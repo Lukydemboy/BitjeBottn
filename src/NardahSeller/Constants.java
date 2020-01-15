@@ -22,10 +22,10 @@ public class Constants {
 
 
 //   POSITIONS
-   public static final Position NARDAHSHOP = new Position(3368,2864);
+   public static final Position NARDAHSHOP   = new Position(3407,2923);
 
 //   NPCS
-   public static final int MERCHANT = 4754;
+   public static final int MERCHANT          = 4754;
 
 
 //   SHOP INTERFACE
