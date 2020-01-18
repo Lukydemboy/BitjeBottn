@@ -3,13 +3,13 @@ package NardahSeller.States;
 import NardahSeller.Constants;
 import org.rspeer.runetek.adapter.component.InterfaceComponent;
 import org.rspeer.runetek.adapter.scene.Player;
-import org.rspeer.runetek.api.component.Bank;
 import org.rspeer.runetek.api.component.Interfaces;
 import org.rspeer.runetek.api.component.tab.Inventory;
 import org.rspeer.runetek.api.scene.Npcs;
 import org.rspeer.runetek.api.scene.Players;
 import org.rspeer.runetek.api.scene.SceneObjects;
-import org.rspeer.runetek.adapter.scene.Npc;
+
+import java.util.function.BooleanSupplier;
 
 public class State {
     Player player = Players.getLocal();
@@ -54,5 +54,10 @@ public class State {
     public static boolean isShopOpen() {
         return Interfaces.getComponent(Constants.SHOPINTERFACEID, Constants.SHOPCHILDID) != null ;
     }
+
+    public static boolean isVerkocht(int startStack, int currentStack) {
+        return (currentStack - startStack) < 0;
+    }
+
 
 }
