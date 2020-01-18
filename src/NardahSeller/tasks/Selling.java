@@ -28,7 +28,7 @@ public class Selling extends Task {
         Npc merchant = Npcs.getNearest(Constants.MERCHANT);
 
         if (shopInterface == null) {
-            Log.info("Open shop");
+            State.action = "Opening shop";
             merchant.interact("Trade");
         }
 
@@ -36,17 +36,19 @@ public class Selling extends Task {
         if (State.isShopOpen()) {
             InterfaceComponent shopInvInterface = Interfaces.getComponent(Constants.SHOPINVINTERFACE, Constants.SHOPINVID);
 
+//          Over alle items van SELLITEMS array loopen en checks uitvoeren, als alle checks goed zijn verkoopt hij (shopstackamount - MAXSELLINGAMOUNT) items
             for (int itemID : Constants.SELLITEMS) {
                 if (Inventory.contains(itemID)) {
 
-//                Begint van 1 omdat index 0 geen item is in Shop
+//                  Over de eerste 3 (de items dat we willen sellen) loopen en de ids vergelijken met de SELLITEMS array
+//                  Begint van 1 omdat index 0 geen item is in Shop
                     for (int t = 1; t <= Constants.SELLITEMS.length; t++) {
                         State.action = "Shop Checken...";
                         shopInterface = Interfaces.getComponent(Constants.SHOPINTERFACEID, Constants.SHOPCHILDID, t);
 
                         int shopItemID = shopInterface.getItemId();
 
-//                  shopItemID met 1 verhogen omdat we noted items hebben, de shop heeft unnoted items
+//                      shopItemID met 1 verhogen omdat we noted items hebben, de shop heeft unnoted items
                         if ((shopItemID + 1) == itemID) {
                             if (shopInterface.getItemStackSize() < Constants.MAXSELLINGAMOUNT) {
                                 int shopAmount = shopInterface.getItemStackSize();
@@ -56,11 +58,9 @@ public class Selling extends Task {
 
                                 InterfaceComponent invSlot = null;
 
+//                              Zoeken in inventory naar de juiste component van het item dat we willen sellen
                                 for (int c = 0; c < itemsInInv; c++) {
                                     int compItemID = shopInvInterface.getComponent(c).getItemId();
-
-                                    Log.info(compItemID);
-                                    Log.info(itemID);
 
                                     if (compItemID != -1) {
                                         if (compItemID == itemID) {
@@ -76,7 +76,7 @@ public class Selling extends Task {
                                         invSlot.interact("Sell 1");
                                     }
 
-//                                  TODO:: Sleep until currentstack < startStack
+//                                  TODO:: Sleep until currentstack < startStack, meer lezen over booleansupplier
                                     Time.sleep(SecureGenerator.randomInt(1302, 1793));
 
                                 }
@@ -96,8 +96,6 @@ public class Selling extends Task {
 
             shopInterfaceClose.interact("Close");
 
-
-//            shopInterface.getComponent(Constants.SHOPITEMCHAIN).item
         }
 
 
