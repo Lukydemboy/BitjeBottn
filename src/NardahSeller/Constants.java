@@ -3,6 +3,7 @@ package NardahSeller;
 import org.rspeer.runetek.api.movement.position.Position;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Constants {
@@ -49,12 +50,12 @@ public class Constants {
    public final static int MAXSELLINGAMOUNT     = 4;
 
 //   WORLDS
-   public final static int[] WORLDS             = {302, 303, 304, 305, 306, 307, 309, 310, 311, 312, 313, 314, 315, 317, 318, 319, 320, 321, 322, 323, 324,
+   public final static Integer[] WORLDS         = {302, 303, 304, 305, 306, 307, 309, 310, 311, 312, 313, 314, 315, 317, 318, 319, 320, 321, 322, 323, 324,
                                                    327, 328, 329, 330, 331, 332, 333, 334, 336, 338, 339, 340, 341, 342, 343, 344, 346, 347, 348, 350, 351,
                                                    352, 354, 355, 356, 357, 358, 359, 360, 362, 365, 367, 368, 369, 370, 374, 375, 376, 377, 378, 386, 387,
                                                    388, 389, 390, 395, 421, 422, 424, 444, 445, 465, 466, 491, 492, 493, 494, 495, 496, 513, 514, 515, 516,
                                                    517, 518, 519, 520, 521, 522, 523, 524, 525};
-
+   public static List<Integer> worldList = Arrays.asList(WORLDS);
    public static List<Integer> hoppedWorlds     = new ArrayList<Integer>(){
       {
          add(302);

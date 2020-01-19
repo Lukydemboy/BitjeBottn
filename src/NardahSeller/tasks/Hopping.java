@@ -12,6 +12,10 @@ import org.rspeer.runetek.api.component.tab.Tabs;
 import org.rspeer.script.task.Task;
 import org.rspeer.ui.Log;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static NardahSeller.Constants.WORLDS;
 import static NardahSeller.Constants.hoppedWorlds;
 
@@ -62,8 +66,11 @@ public class Hopping extends Task {
             } else {
 //                Wanneer een goeie wereld ( meer dan 2 verkocht) Streak methode (vorige wereld + 1)
                 hoppingMethod = "Streak";
-//                TODO:: Volgende index array --> nu kan ie proberen hoppen naar free worlds (omdat wereld (ID) + 1 soms een free wereld is)
-                WorldHopper.hopTo(Constants.hoppedWorlds.get(Constants.hoppedWorlds.size() - 1) + 1);
+
+                int nextHopWorld = Constants.worldList.indexOf(Constants.worldList.get(Constants.hoppedWorlds.size() - 1)) + 1;
+
+                Constants.hoppedWorlds.add(nextHopWorld);
+                WorldHopper.hopTo(Constants.worldList.get(nextHopWorld));
             }
 
             Log.fine("Overlopen werelden");

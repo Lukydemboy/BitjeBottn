@@ -57,6 +57,8 @@ public class State {
         return (currentStack - startStack) < 0;
     }
 
-
+    public static boolean hasHoppedAll() {
+        return Constants.WORLDS.length == Constants.worldList.size();
+    }
 
 }
