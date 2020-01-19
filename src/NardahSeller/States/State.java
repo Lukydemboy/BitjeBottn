@@ -9,8 +9,6 @@ import org.rspeer.runetek.api.scene.Npcs;
 import org.rspeer.runetek.api.scene.Players;
 import org.rspeer.runetek.api.scene.SceneObjects;
 
-import java.util.function.BooleanSupplier;
-
 public class State {
     Player player = Players.getLocal();
 //
@@ -58,6 +56,7 @@ public class State {
     public static boolean isVerkocht(int startStack, int currentStack) {
         return (currentStack - startStack) < 0;
     }
+
 
 
 }

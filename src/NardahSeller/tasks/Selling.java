@@ -8,6 +8,8 @@ import org.rspeer.runetek.adapter.scene.Npc;
 import org.rspeer.runetek.api.commons.Time;
 import org.rspeer.runetek.api.component.Interfaces;
 import org.rspeer.runetek.api.component.tab.Inventory;
+import org.rspeer.runetek.api.component.tab.Tab;
+import org.rspeer.runetek.api.component.tab.Tabs;
 import org.rspeer.runetek.api.scene.Npcs;
 import org.rspeer.script.task.Task;
 import org.rspeer.ui.Log;
@@ -17,7 +19,7 @@ public class Selling extends Task {
 
     @Override
     public boolean validate() {
-        return State.isAtShop() && State.seesMerchant();
+        return State.isAtShop() && State.seesMerchant() && !Constants.hasSold;
     }
 
     @Override
@@ -30,11 +32,16 @@ public class Selling extends Task {
         if (shopInterface == null) {
             State.action = "Opening shop";
             merchant.interact("Trade");
+            Time.sleep(SecureGenerator.randomInt(1302, 1793));
         }
 
 //        Time.sleepUntil(State::)
         if (State.isShopOpen()) {
+            Constants.hasSold = true;
+
             InterfaceComponent shopInvInterface = Interfaces.getComponent(Constants.SHOPINVINTERFACE, Constants.SHOPINVID);
+
+            Constants.itemsVerkocht = 0;
 
 //          Over alle items van SELLITEMS array loopen en checks uitvoeren, als alle checks goed zijn verkoopt hij (shopstackamount - MAXSELLINGAMOUNT) items
             for (int itemID : Constants.SELLITEMS) {
@@ -71,10 +78,15 @@ public class Selling extends Task {
                                     }
                                 }
 
+//                              Verkopen items
                                 for (int i = 0; i < (Constants.MAXSELLINGAMOUNT - shopAmount); i++) {
+                                    Constants.slechteWereldStreak = 0;
                                     if (invSlot != null) {
                                         invSlot.interact("Sell 1");
                                     }
+
+                                    Constants.itemsVerkocht += 1;
+                                    Constants.totalSold += 1;
 
 //                                  TODO:: Sleep until currentstack < startStack, meer lezen over booleansupplier
                                     Time.sleep(SecureGenerator.randomInt(1302, 1793));
@@ -96,10 +108,14 @@ public class Selling extends Task {
 
             shopInterfaceClose.interact("Close");
 
+            Time.sleep(SecureGenerator.randomInt(921, 1349));
+
+            Tabs.open(Tab.LOGOUT);
+
         }
 
 
 //
-        return 1200;
+        return SecureGenerator.randomInt(900, 1283);
     }
 }

@@ -7,7 +7,6 @@ import org.rspeer.runetek.api.commons.Time;
 import org.rspeer.runetek.api.component.Bank;
 import org.rspeer.runetek.api.component.tab.Inventory;
 import org.rspeer.script.task.Task;
-import org.rspeer.ui.Log;
 
 public class Banking extends Task {
 
@@ -75,6 +74,6 @@ public class Banking extends Task {
 
         }
 
-        return 1300;
+        return SecureGenerator.randomInt(912, 1842);
     }
 }
